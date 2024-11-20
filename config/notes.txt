@@ -1,0 +1,10 @@
+link to list page
+<a href="{% url 'course_list'%}">List</a>
+link to detail page
+<a href="{% url 'course_detail' course.pk%}">Go Detail</a>
+link to create page
+<a href="{% url 'course_create'%}">Create</a>
+link to update page
+<a href="{% url 'course_update' object.pk%}">Update</a>
+link to delete page
+<a href="{% url 'course_delete' object.pk%}">Delete</a>

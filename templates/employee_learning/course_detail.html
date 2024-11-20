@@ -1,1 +1,42 @@
-<h1>Course Detail Page</h1>
+{% extends "base.html" %}
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Course Detail Page</h1>
+
+    <!-- Course Details -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-primary mb-3">Course Title: {{ course_object.title|upper }}</h5>
+            <p class="card-text"><strong>Level:</strong> {{ course_object.get_level_display }}</p>
+        </div>
+    </div>
+
+    <!-- Assigned Employees -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-success mb-3">Assigned Employees:</h5>
+            {% if object.employee.all %}
+                <ul class="list-group">
+                    {% for emp in object.employee.all %}
+                        <li class="list-group-item">
+                            <strong>{{ emp.name }}</strong>: {{ emp.division }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No employees assigned to this course.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'course_delete' object.pk %}" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Delete
+        </a>
+        <a href="{% url 'course_update' object.pk %}" class="btn btn-warning">
+            <i class="bi bi-pencil"></i> Update
+        </a>
+    </div>
+</div>
+{% endblock %}
